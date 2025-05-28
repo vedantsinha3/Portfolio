@@ -37,15 +37,6 @@
       --blur: blur(20px);
     }
 
-    [data-theme="dark"] {
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-light: #64748b;
-      --bg-primary: #0f172a;
-      --bg-secondary: #1e293b;
-      --border: #334155;
-      --glassmorphism: rgba(15, 23, 42, 0.8);
-    }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -60,6 +51,16 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 2rem;
+    }
+
+    /* Full-width container override for header nav */
+    .site-header .container {
+      max-width: 100%;
+      margin: 0;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     /* Enhanced cursor with glow effect */

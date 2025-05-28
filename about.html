@@ -168,10 +168,15 @@
       left: 0;
     }
 
+    /* Enhanced navigation */
     .site-nav ul {
       display: flex;
       list-style: none;
       gap: 2rem;
+      background: var(--gradient-card);
+      padding: 0.8rem 1.5rem;
+      border-radius: 20px;
+      backdrop-filter: var(--blur);
     }
 
     .site-nav a {
@@ -179,49 +184,81 @@
       color: var(--text-secondary);
       font-weight: 500;
       position: relative;
-      transition: color 0.3s ease;
-      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+      padding: 0.7rem 1.2rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
     }
 
     .site-nav a:hover,
     .site-nav a.active {
       color: var(--primary);
+      background: rgba(99, 102, 241, 0.1);
+      transform: translateY(-2px);
     }
 
     .site-nav a::after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: 5px;
       left: 50%;
       width: 0;
       height: 2px;
-      background: var(--primary);
+      background: var(--gradient-accent);
       transition: all 0.3s ease;
       transform: translateX(-50%);
+      border-radius: 2px;
     }
 
     .site-nav a:hover::after,
     .site-nav a.active::after {
-      width: 100%;
+      width: 80%;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      background: var(--gradient-card);
+      border: none;
+      border-radius: 12px;
+      padding: 0.7rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: var(--blur);
+      color: var(--text-primary);
+      margin-left: 1rem;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(180deg);
+      background: var(--primary);
+      color: white;
     }
 
     .nav-toggle {
       display: none;
       flex-direction: column;
       gap: 4px;
-      background: none;
+      background: var(--gradient-card);
       border: none;
       cursor: pointer;
-      padding: 0.5rem;
+      padding: 0.8rem;
+      border-radius: 12px;
+      backdrop-filter: var(--blur);
+      transition: all 0.3s ease;
     }
 
     .nav-toggle span {
       width: 24px;
-      height: 2px;
+      height: 3px;
       background: var(--text-primary);
       transition: all 0.3s ease;
+      border-radius: 2px;
     }
 
+    .nav-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+    }
     /* Main Content */
     main {
       padding-top: 120px;
@@ -679,7 +716,6 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html" class="active">About</a></li>
-          <li><a href="services.html">Services</a></li>
           <li><a href="portfolio.html">Work</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -701,13 +737,13 @@
         <div class="about-content">
           <div class="about-text">
             <p>
-              I'm a <span class="highlight">Computer Science & Engineering</span> student at UC Merced with an insatiable passion for crafting elegant code and exploring the frontiers of technology. My journey into tech began with curiosity about how digital experiences shape our world, and it has evolved into a deep commitment to <span class="highlight">AI, Computer Vision, and innovative web solutions</span>.
+              Hey there! I’m a <span class="highlight">Computer Science &amp; Engineering</span> student at UC Merced who can’t resist a good coding challenge or the thrill of exploring new tech frontiers. What started with a simple website experiment has blossomed into a full-blown passion for <span class="highlight">AI, Computer Vision, and innovative web solutions</span>.
             </p>
             <p>
-              What drives me is the intersection of <span class="highlight">creativity and logic</span> – turning complex problems into intuitive, user-centered experiences. Whether I'm training neural networks, building responsive web applications, or designing mobile interfaces, I approach each project with the same philosophy: <span class="highlight">technology should empower and delight</span>.
+              I love hanging out where <span class="highlight">creativity and logic</span> collide turning knotty problems into smooth, user-friendly experiences. Whether I'm building responsive web apps, or sketching out mobile interfaces, my guiding principle is simple: <span class="highlight">technology should empower and delight</span>.
             </p>
             <p>
-              When I'm not coding, you'll find me exploring the latest research papers, contributing to open-source projects, or mentoring fellow students. I believe in continuous learning and staying ahead of the curve in our rapidly evolving digital landscape.
+              When I’m not immersed in code, you’ll usually find me hunting for the next scoop of ice cream, wandering through art galleries, or diving into the latest research papers (and maybe even contributing to an open-source project or two). I’m a lifelong learner at heart, always eager to share what I’ve picked up with fellow students and stay one step ahead in our ever-evolving digital world.
             </p>
           </div>
           
@@ -723,7 +759,7 @@
             <div class="stat-label">Projects Completed</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number" data-count="50">0</div>
+            <div class="stat-number" data-count="50+">0</div>
             <div class="stat-label">GitHub Commits</div>
           </div>
           <div class="stat-item">

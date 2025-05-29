@@ -777,7 +777,7 @@
         <span></span>
         <span></span>
       </button>
-      <nav class="site-nav">
+      <nav class="site-nav" id="site-nav">
         <ul>
           <li><a href="../index.html#hero">Home</a></li>
           <li><a href="../about.html#about">About</a></li>
@@ -884,6 +884,34 @@
         }, 500);
       }, 1000);
     });
+
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const siteNav = document.getElementById('site-nav');
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      siteNav.classList.toggle('active');
+    });
+
+    // Close mobile nav when clicking on a link
+    document.querySelectorAll('.site-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        siteNav.classList.remove('active');
+      });
+    });
+
+    // Add loading progress for better UX
+    let loadProgress = 0;
+    function updateLoadProgress() {
+      loadProgress += Math.random() * 30;
+      if (loadProgress < 100) {
+        setTimeout(updateLoadProgress, Math.random() * 200);
+      }
+    }
+    updateLoadProgress();
+    
   </script>
 </body>
 </html> 

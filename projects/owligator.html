@@ -557,16 +557,22 @@
         bottom: 0;
         background: var(--glassmorphism);
         backdrop-filter: var(--blur);
-        transform: translateY(-100%);
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-top: 1px solid var(--border);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0s linear 0.4s, opacity 0.4s ease;
         z-index: 999;
         display: flex;
         align-items: center;
         justify-content: center;
+        transform: translateY(-100%);
+        visibility: hidden;
+        opacity: 0;
       }
 
       .site-nav.active {
         transform: translateY(0%);
+        visibility: visible;
+        opacity: 1;
+        transition-delay: 0s;
       }
 
       .site-nav ul {
@@ -604,39 +610,14 @@
         transform: rotate(-45deg) translate(7px, -6px);
       }
 
-      main {
-        padding-top: 100px;
-      }
-
-      .container {
-        padding: 0 1rem;
-      }
-
-      .section-title {
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .card {
-        transform: none !important;
-      }
-
-      .card:hover {
-        transform: translateY(-10px) !important;
-      }
-
-      .portfolio-card .project-image {
-        height: 220px;
-      }
-
-      .portfolio-card .card-content {
-        padding: 1.5rem;
-      }
+      main { padding-top: 100px; }
+      .container { padding: 0 1rem; }
+      .section-title { font-size: 2.5rem; margin-bottom: 3rem; }
+      .grid { grid-template-columns: 1fr; gap: 2rem; }
+      .card { transform: none !important; }
+      .card:hover { transform: translateY(-10px) !important; }
+      .portfolio-card .project-image { height: 220px; }
+      .portfolio-card .card-content { padding: 1.5rem; }
     }
 
     @media (max-width: 480px) {
@@ -771,12 +752,12 @@
   <header class="site-header">
     <div class="container">
       <a href="../index.html" class="logo">VS.</a>
-      <button class="nav-toggle" aria-label="Toggle navigation">
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <nav class="site-nav">
+      <nav class="site-nav" id="site-nav"> 
         <ul>
           <li><a href="../index.html#hero">Home</a></li>
           <li><a href="../about.html#about">About</a></li>
@@ -849,6 +830,34 @@
         }, 500);
       }, 1000);
     });
+
+
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const siteNav = document.getElementById('site-nav');
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      siteNav.classList.toggle('active');
+    });
+
+    // Close mobile nav when clicking on a link
+    document.querySelectorAll('.site-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        siteNav.classList.remove('active');
+      });
+    });
+
+    // Add loading progress for better UX
+    let loadProgress = 0;
+    function updateLoadProgress() {
+      loadProgress += Math.random() * 30;
+      if (loadProgress < 100) {
+        setTimeout(updateLoadProgress, Math.random() * 200);
+      }
+    }
+    updateLoadProgress();
 
   </script>
 </body>

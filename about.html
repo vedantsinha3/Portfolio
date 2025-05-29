@@ -57,30 +57,6 @@
       align-items: center;
     }
 
-    /* Custom cursor */
-    .cursor {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: var(--primary);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transition: all 0.1s ease;
-      opacity: 0.7;
-    }
-
-    .cursor-trail {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      opacity: 0.5;
-      transition: all 0.2s ease;
-    }
 
     /* Animated Background */
     .bg-animation {
@@ -708,10 +684,6 @@
   </style>
 </head>
 <body>
-  <!-- Custom Cursor -->
-  <div class="cursor"></div>
-  <div class="cursor-trail"></div>
-
   <!-- Animated Background -->
   <div class="bg-animation"></div>
   
@@ -747,13 +719,13 @@
         <div class="about-content">
           <div class="about-text">
             <p>
-              Hey there! I’m a <span class="highlight">Computer Science &amp; Engineering</span> student at UC Merced who can’t resist a good coding challenge or the thrill of exploring new tech frontiers. What started with a simple website experiment has blossomed into a full-blown passion for <span class="highlight">AI, Computer Vision, and innovative web solutions</span>.
+              Hey there! I'm a <span class="highlight">Computer Science &amp; Engineering</span> student at UC Merced who can't resist a good coding challenge or the thrill of exploring new tech frontiers. What started with a simple website experiment has blossomed into a full-blown passion for <span class="highlight">AI, Computer Vision, and innovative web solutions</span>.
             </p>
             <p>
               I love hanging out where <span class="highlight">creativity and logic</span> collide turning knotty problems into smooth, user-friendly experiences. Whether I'm building responsive web apps, or sketching out mobile interfaces, my guiding principle is simple: <span class="highlight">technology should empower and delight</span>.
             </p>
             <p>
-              When I’m not immersed in code, you’ll usually find me hunting for the next scoop of ice cream, wandering through art galleries, or diving into the latest research papers (and maybe even contributing to an open-source project or two). I’m a lifelong learner at heart, always eager to share what I’ve picked up with fellow students and stay one step ahead in our ever-evolving digital world.
+              When I'm not immersed in code, you'll usually find me hunting for the next scoop of ice cream, wandering through art galleries, or diving into the latest research papers (and maybe even contributing to an open-source project or two). I'm a lifelong learner at heart, always eager to share what I've picked up with fellow students and stay one step ahead in our ever-evolving digital world.
             </p>
           </div>
           
@@ -889,20 +861,6 @@
   </footer>
 
   <script>
-    // Custom cursor
-    const cursor = document.querySelector('.cursor');
-    const cursorTrail = document.querySelector('.cursor-trail');
-
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX - 10 + 'px';
-      cursor.style.top = e.clientY - 10 + 'px';
-      
-      setTimeout(() => {
-        cursorTrail.style.left = e.clientX - 3 + 'px';
-        cursorTrail.style.top = e.clientY - 3 + 'px';
-      }, 100);
-    });
-
     // Header scroll effect
     window.addEventListener('scroll', () => {
       const header = document.querySelector('.site-header');
@@ -912,23 +870,6 @@
         header.classList.remove('scrolled');
       }
     });
-
-    // Mobile navigation toggle
-    const navToggle = document.getElementById('nav-toggle');
-    const siteNav = document.getElementById('site-nav');
-
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      siteNav.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.site-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        siteNav.classList.remove('active');
-      });
-    });
-
     // Create floating particles
     function createParticles() {
       const particlesContainer = document.querySelector('.particles');

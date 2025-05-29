@@ -63,118 +63,7 @@
       align-items: center;
     }
 
-    /* Enhanced cursor with glow effect */
-    .cursor {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: var(--primary);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transition: all 0.1s ease;
-      opacity: 0.8;
-      box-shadow: 0 0 20px var(--primary);
-      mix-blend-mode: difference;
-    }
 
-    .cursor-trail {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      opacity: 0.6;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 10px var(--accent);
-    }
-
-    .cursor.hover {
-      transform: scale(2);
-      background: var(--accent-2);
-      box-shadow: 0 0 30px var(--accent-2);
-    }
-
-    /* Enhanced animated background with mesh gradient */
-    .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3), transparent 50%),
-        linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-      background-size: 400% 400%;
-      animation: gradientShift 20s ease infinite;
-      opacity: 0.1;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      25% { background-position: 100% 50%; }
-      50% { background-position: 100% 100%; }
-      75% { background-position: 0% 100%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Interactive mesh background */
-    .mesh-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: 
-        radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.15) 0%, transparent 50%);
-      transition: background 0.3s ease;
-    }
-
-    /* Enhanced floating particles */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.4;
-      filter: blur(1px);
-    }
-
-    .particle.primary {
-      background: linear-gradient(45deg, var(--primary), var(--accent));
-      animation: float 8s ease-in-out infinite, pulse 4s ease-in-out infinite;
-    }
-
-    .particle.secondary {
-      background: linear-gradient(45deg, var(--accent-2), var(--secondary));
-      animation: float 12s ease-in-out infinite reverse, pulse 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.4; }
-      25% { transform: translateY(-30px) rotate(90deg); opacity: 0.7; }
-      50% { transform: translateY(-15px) rotate(180deg); opacity: 0.3; }
-      75% { transform: translateY(-40px) rotate(270deg); opacity: 0.6; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
 
     /* Enhanced header with glassmorphism */
     .site-header {
@@ -183,20 +72,20 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      background: var(--glassmorphism);
-      backdrop-filter: var(--blur);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       transition: all 0.3s ease;
-      border-radius: 0 0 20px 20px;
-      margin: 0 1rem;
+      border-radius: 0;
+      margin: 0;
     }
 
     .site-header.scrolled {
-      background: var(--glassmorphism);
+      background: rgba(255, 255, 255, 0.98);
       box-shadow: var(--shadow);
-      transform: translateY(10px);
-      margin: 10px 1rem 0;
-      border-radius: 20px;
+      transform: none;
+      margin: 0;
+      border-radius: 0;
     }
 
     .site-header .container {
@@ -207,41 +96,39 @@
     }
 
     .logo {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--primary);
       text-decoration: none;
-      font-family: 'Space Grotesk', monospace;
+      font-family: 'JetBrains Mono', monospace;
       position: relative;
       overflow: hidden;
-      padding: 0.5rem 1rem;
-      border-radius: 15px;
-      background: var(--gradient-card);
-      backdrop-filter: var(--blur);
+      padding: 0;
+      border-radius: 0;
+      background: none;
+      backdrop-filter: none;
       transition: all 0.3s ease;
     }
 
-    .logo::before {
+    .logo::after {
       content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: -100%;
       width: 100%;
-      height: 100%;
+      height: 2px;
       background: var(--gradient-accent);
-      transition: left 0.5s ease;
-      z-index: -1;
-      border-radius: 15px;
+      transition: left 0.3s ease;
     }
 
-    .logo:hover::before {
+    .logo:hover::after {
       left: 0;
     }
 
     .logo:hover {
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+      color: var(--primary);
+      transform: none;
+      box-shadow: none;
     }
 
     /* Enhanced navigation */
@@ -329,13 +216,10 @@
       transform: rotate(-45deg) translate(7px, -6px);
     }
 
-    /* Main content with enhanced spacing */
     main {
       padding-top: 140px;
       min-height: 100vh;
     }
-
-    /* Enhanced section title with animated gradient */
     .section-title {
       font-size: clamp(3rem, 6vw, 5rem);
       font-weight: 800;
@@ -375,7 +259,6 @@
       100% { width: 100px; opacity: 1; }
     }
 
-    /* Enhanced grid layout */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -383,7 +266,6 @@
       margin-bottom: 4rem;
     }
 
-    /* Enhanced card styles with 3D effects */
     .card {
       background: var(--glassmorphism);
       backdrop-filter: var(--blur);
@@ -701,15 +583,6 @@
     <div class="loader"></div>
   </div>
 
-  <!-- Enhanced cursor -->
-  <div class="cursor"></div>
-  <div class="cursor-trail"></div>
-
-  <!-- Enhanced animated background -->
-  <div class="bg-animation"></div>
-
-  <!-- Enhanced floating particles -->
-  <div class="particles"></div>
 
   <!-- Enhanced site header -->
   <header class="site-header">
@@ -793,71 +666,13 @@
       }, 1000);
     });
 
-    // Enhanced cursor with hover effects
-    const cursor = document.querySelector('.cursor');
-    const cursorTrail = document.querySelector('.cursor-trail');
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.1;
-      cursorY += (mouseY - cursorY) * 0.1;
-      
-      cursor.style.left = cursorX - 10 + 'px';
-      cursor.style.top = cursorY - 10 + 'px';
-      
-      setTimeout(() => {
-        cursorTrail.style.left = cursorX - 3 + 'px';
-        cursorTrail.style.top = cursorY - 3 + 'px';
-      }, 50);
-      
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Cursor hover effects
-    const hoverElements = document.querySelectorAll('a, button, .card');
-    hoverElements.forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-
-    // Interactive mesh background
-    const meshBg = document.getElementById('mesh-bg');
-    document.addEventListener('mousemove', e => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      meshBg.style.setProperty('--mouse-x', x + '%');
-      meshBg.style.setProperty('--mouse-y', y + '%');
-    });
+    
 
     // Enhanced header scroll effect
     window.addEventListener('scroll', () => {
       const header = document.querySelector('.site-header');
       const scrolled = window.scrollY > 100;
       header.classList.toggle('scrolled', scrolled);
-    });
-
-    // Mobile navigation with enhanced animations
-    const navToggle = document.querySelector('.nav-toggle');
-    const siteNav = document.querySelector('.site-nav');
-
-    navToggle.addEventListener('click', () => {
-      siteNav.classList.toggle('active');
-      document.body.style.overflow = siteNav.classList.contains('active') ? 'hidden' : 'auto';
-    });
-
-    // Close nav when clicking on links
-    document.querySelectorAll('.site-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        siteNav.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      });
     });
 
     // Enhanced scroll reveal with stagger effect
@@ -882,75 +697,18 @@
       });
     }
 
-    // Parallax effect for cards on scroll
-    function handleParallax() {
-      const cards = document.querySelectorAll('.portfolio-card');
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * -0.5;
 
-      cards.forEach((card, index) => {
-        const offset = (index % 2 === 0 ? rate : -rate) * 0.1;
-        card.style.transform = `translateY(${offset}px)`;
-      });
-    }
-
-    // Smooth scroll behavior for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Enhanced image loading with fade-in effect
-    function handleImageLoading() {
-      const images = document.querySelectorAll('.project-image');
-      
-      images.forEach(img => {
-        img.style.opacity = '0';
-        img.style.transition = 'opacity 0.5s ease';
-        
-        img.addEventListener('load', () => {
-          img.style.opacity = '1';
-        });
-        
-        // If image is already loaded
-        if (img.complete) {
-          img.style.opacity = '1';
-        }
-      });
-    }
-
-    // Performance optimized scroll handler
     let ticking = false;
     function handleScroll() {
       if (!ticking) {
         requestAnimationFrame(() => {
-          handleParallax();
+          
           ticking = false;
         });
         ticking = true;
       }
     }
 
-    // Add subtle hover sound effect (optional)
-    function addHoverSounds() {
-      const hoverElements = document.querySelectorAll('.card, .project-link, .logo');
-      
-      hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          // Create a subtle audio context for hover feedback
-          // This would require actual audio files, so it's commented out
-          // playHoverSound();
-        });
-      });
-    }
 
     // Keyboard navigation support
     function handleKeyboardNavigation() {
@@ -988,32 +746,6 @@
       }
     }
     updateLoadProgress();
-
-    // Easter egg: Konami code
-    let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-    let konamiIndex = 0;
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.keyCode === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-          // Activate special rainbow mode
-          document.body.style.filter = 'hue-rotate(0deg)';
-          let hue = 0;
-          const rainbowInterval = setInterval(() => {
-            hue += 5;
-            document.body.style.filter = `hue-rotate(${hue}deg)`;
-            if (hue >= 360) {
-              clearInterval(rainbowInterval);
-              document.body.style.filter = 'none';
-            }
-          }, 50);
-          konamiIndex = 0;
-        }
-      } else {
-        konamiIndex = 0;
-      }
-    });
 
   </script>
 </body>

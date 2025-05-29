@@ -772,7 +772,7 @@
             <div class="stat-label">Projects Completed</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number" data-count="50+">0</div>
+            <div class="stat-number" data-count="100+">0</div>
             <div class="stat-label">GitHub Commits</div>
           </div>
           <div class="stat-item">
@@ -928,16 +928,18 @@
       const counters = document.querySelectorAll('.stat-number');
       
       counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-count'), 10);
+        const originalDataCount = counter.getAttribute('data-count'); // Store original value
+        const target = parseInt(originalDataCount, 10); // Parse only the number
         const duration = 2000;
         const stepTime = Math.abs(Math.floor(duration / target));
         let current = 0;
         
         const timer = setInterval(() => {
           current += 1;
-          counter.textContent = current;
+          counter.textContent = current; // Display just the number during animation
           if (current === target) {
             clearInterval(timer);
+            counter.textContent = originalDataCount; // Set to original value (e.g., "100+") when done
           }
         }, stepTime);
       });

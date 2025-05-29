@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Owligator • Vedant Sinha • Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #f59e0b;
+      --accent: #06b6d4;
+      --accent-2: #8b5cf6;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --text-light: #94a3b8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-dark: #0f172a;
+      --border: #e2e8f0;
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      --shadow-hover: 0 35px 60px -12px rgba(99, 102, 241, 0.4);
+      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      --glassmorphism: rgba(255, 255, 255, 0.25);
+      --blur: blur(20px);
+    }
+
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      overflow-x: hidden;
+      background: var(--bg-primary);
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Full-width container override for header nav */
+    .site-header .container {
+      max-width: 100%;
+      margin: 0;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+
+    /* Enhanced animated background with mesh gradient */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3), transparent 50%),
+        linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      opacity: 0.1;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 100% 50%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Interactive mesh background */
+    .mesh-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+      transition: background 0.3s ease;
+    }
+
+    /* Enhanced floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.4;
+      filter: blur(1px);
+    }
+
+    .particle.primary {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      animation: float 8s ease-in-out infinite, pulse 4s ease-in-out infinite;
+    }
+
+    .particle.secondary {
+      background: linear-gradient(45deg, var(--accent-2), var(--secondary));
+      animation: float 12s ease-in-out infinite reverse, pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.4; }
+      25% { transform: translateY(-30px) rotate(90deg); opacity: 0.7; }
+      50% { transform: translateY(-15px) rotate(180deg); opacity: 0.3; }
+      75% { transform: translateY(-40px) rotate(270deg); opacity: 0.6; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Enhanced header with glassmorphism */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--glassmorphism);
+      backdrop-filter: var(--blur);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+      border-radius: 0 0 20px 20px;
+      margin: 0 1rem;
+    }
+
+    .site-header.scrolled {
+      background: var(--glassmorphism);
+      box-shadow: var(--shadow);
+      transform: translateY(10px);
+      margin: 10px 1rem 0;
+      border-radius: 20px;
+    }
+
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      font-family: 'Space Grotesk', monospace;
+      position: relative;
+      overflow: hidden;
+      padding: 0.5rem 1rem;
+      border-radius: 15px;
+      background: var(--gradient-card);
+      backdrop-filter: var(--blur);
+      transition: all 0.3s ease;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-accent);
+      transition: left 0.5s ease;
+      z-index: -1;
+      border-radius: 15px;
+    }
+
+    .logo:hover::before {
+      left: 0;
+    }
+
+    .logo:hover {
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+    }
+
+    /* Enhanced navigation */
+    .site-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      background: var(--gradient-card);
+      padding: 0.8rem 1.5rem;
+      border-radius: 20px;
+      backdrop-filter: var(--blur);
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+      padding: 0.7rem 1.2rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+    }
+
+    .site-nav a:hover,
+    .site-nav a.active {
+      color: var(--primary);
+      background: rgba(99, 102, 241, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .site-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-accent);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .site-nav a:hover::after,
+    .site-nav a.active::after {
+      width: 80%;
+    }
+
+
+    .btn-nav:hover {
+      background: var(--gradient-accent);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: var(--gradient-card);
+      border: none;
+      cursor: pointer;
+      padding: 0.8rem;
+      border-radius: 12px;
+      backdrop-filter: var(--blur);
+      transition: all 0.3s ease;
+    }
+
+    .nav-toggle span {
+      width: 24px;
+      height: 3px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .nav-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Main content with enhanced spacing */
+    main {
+      padding-top: 140px;
+      min-height: 100vh;
+    }
+
+    /* Enhanced section title with animated gradient */
+    .section-title {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 4rem;
+      font-family: 'Space Grotesk', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientText 4s ease infinite;
+      position: relative;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--gradient-accent);
+      border-radius: 2px;
+      animation: titleUnderline 2s ease-out;
+    }
+
+    @keyframes gradientText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes titleUnderline {
+      0% { width: 0; opacity: 0; }
+      100% { width: 100px; opacity: 1; }
+    }
+
+    /* Enhanced grid layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    /* Enhanced card styles with 3D effects */
+    .card {
+      background: var(--glassmorphism);
+      backdrop-filter: var(--blur);
+      border-radius: 25px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-card);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .card:hover {
+      transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+      font-family: 'Space Grotesk', sans-serif;
+      position: relative;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Enhanced portfolio card styles */
+    .portfolio-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .portfolio-card .project-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: all 0.5s ease;
+      filter: brightness(0.9) contrast(1.1);
+    }
+
+    .portfolio-card:hover .project-image {
+      transform: scale(1.1);
+      filter: brightness(1) contrast(1.2);
+    }
+
+    .portfolio-card .card-content {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .portfolio-card .card-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      right: 2rem;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* Enhanced project links with animated buttons */
+    .project-link {
+      margin-top: auto;
+      align-self: flex-start;
+      background: var(--gradient);
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .project-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-accent);
+      transition: left 0.5s ease;
+      z-index: -1;
+    }
+
+    .project-link:hover::before {
+      left: 0;
+    }
+
+    .project-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--text-secondary), var(--text-light));
+    }
+
+    .btn-secondary:hover {
+      background: var(--gradient-accent);
+    }
+
+    /* Enhanced scroll reveal animations */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-reveal:nth-child(even) {
+      transform: translateY(50px) translateX(-30px);
+    }
+
+    .scroll-reveal:nth-child(even).revealed {
+      transform: translateY(0) translateX(0);
+    }
+
+    /* Enhanced footer */
+    .site-footer {
+      background: var(--glassmorphism);
+      backdrop-filter: var(--blur);
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+      margin-top: 6rem;
+      position: relative;
+    }
+
+    .site-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient-accent);
+    }
+
+    /* Enhanced responsive design */
+    @media (max-width: 768px) {
+      .site-header {
+        margin: 0;
+        border-radius: 0;
+      }
+
+      .site-header.scrolled {
+        margin: 0;
+        border-radius: 0;
+        transform: none;
+      }
+
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--glassmorphism);
+        backdrop-filter: var(--blur);
+        transform: translateY(-100%);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .site-nav.active {
+        transform: translateY(0%);
+      }
+
+      .site-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        background: transparent;
+      }
+
+      .site-nav a {
+        font-size: 1.3rem;
+        padding: 1rem 2rem;
+        background: var(--gradient-card);
+        border-radius: 15px;
+        backdrop-filter: var(--blur);
+        width: 200px;
+        text-align: center;
+      }
+
+      .nav-toggle {
+        display: flex;
+        z-index: 1000;
+      }
+
+      .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      main {
+        padding-top: 100px;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .card {
+        transform: none !important;
+      }
+
+      .card:hover {
+        transform: translateY(-10px) !important;
+      }
+
+      .portfolio-card .project-image {
+        height: 220px;
+      }
+
+      .portfolio-card .card-content {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header .container {
+        padding: 0.8rem 1rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .portfolio-card .project-image {
+        height: 200px;
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Project Page Specific Styles */
+    .project-detail-section {
+        padding: 6rem 0;
+    }
+
+    .project-detail-section h2 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--primary);
+    }
+
+    .project-content {
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.8;
+        color: var(--text-secondary);
+    }
+
+    .project-content h3 {
+        font-size: 1.8rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+
+    .project-content img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 2rem auto;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+
+    .project-content ul {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .project-content li {
+        margin-bottom: 0.8rem;
+    }
+
+    .project-content a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .project-content a:hover {
+        text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Enhanced cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-trail"></div>
+
+  <!-- Enhanced animated background -->
+  <div class="bg-animation"></div>
+  <div class="mesh-bg" id="mesh-bg"></div>
+
+  <!-- Enhanced floating particles -->
+  <div class="particles"></div>
+
+  <!-- Enhanced site header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo">VS.</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <ul>
+          <li><a href="../index.html#hero">Home</a></li>
+          <li><a href="../about.html#about">About</a></li>
+          <li><a href="../portfolio.html#portfolio">Work</a></li>
+          <li><a href="../contact.html#contact" class="btn-nav">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+        <h2 class="section-title">Anchor</h2>
+        <div class="project-content">
+            <p><strong>Anchor</strong> is a cross-platform desktop application (macOS and Windows) designed for real-time, privacy-first focus tracking. By leveraging gaze detection and screen context, it helps users stay on task while providing session-level analytics, feature gating, and subscription-based access to premium functionality.</p>
+    
+            <h3>Project Details</h3>
+            <p>
+                Anchor uses gaze estimation and screen activity monitoring to determine user attention. If a user looks away from the screen or engages with unrelated applications, Anchor triggers custom in-app notifications. All data is stored locally during a session, and cloud sync occurs at session end, preserving user privacy.
+            </p>
+            <p>
+                The architecture separates system-level tasks (handled in Rust) from UI logic (React/TypeScript), connected through Tauri's secure bridge. A robust state layer built with Zustand ensures synchronized behavior between gaze tracking, screen awareness, and UI feedback.
+            </p>
+    
+            <h3>Technologies Used</h3>
+            <ul>
+                <li><strong>Tauri</strong> – Desktop shell with Rust backend + WebView frontend</li>
+                <li><strong>Rust</strong> – Gaze detection, screen tracking, session logic</li>
+                <li><strong>React (TypeScript)</strong> – Frontend UI</li>
+                <li><strong>TailwindCSS</strong> – UI styling</li>
+                <li><strong>Zustand</strong> – State management</li>
+                <li><strong>Radix UI</strong> – Headless component primitives</li>
+                <li><strong>Framer Motion</strong> – UI animation and transitions</li>
+                <li><strong>SQLite</strong> – Local storage for sessions and analytics</li>
+                <li><strong>Supabase</strong> – User authentication, cloud sync, profile data</li>
+                <li><strong>Stripe</strong> – Subscription payments, billing portal</li>
+                <li><strong>Sentry</strong> – Optional error/crash monitoring (Rust + React)</li>
+            </ul>
+    
+            <h3>Focus Tracking</h3>
+            <ul>
+                <li><strong>MediaPipe</strong> (C++ or WASM) – Real-time gaze estimation</li>
+                <li><strong>Rust subprocess/plugin</strong> – Bridges MediaPipe with UI state</li>
+            </ul>
+    
+            <h3>Screen Monitoring</h3>
+            <ul>
+                <li><strong>macOS</strong>: CGWindowListCopyWindowInfo</li>
+                <li><strong>Windows</strong>: GetForegroundWindow, EnumWindows</li>
+            </ul>
+    
+            <h3>Authentication & Licensing</h3>
+            <ul>
+                <li><strong>Supabase Auth</strong> – Sign-in and role management</li>
+                <li><strong>Stripe Webhooks</strong> – Updates subscription roles</li>
+                <li><strong>Offline License Token</strong> – Optional for local-only usage</li>
+            </ul>
+    
+            <h3>Payments</h3>
+            <ul>
+                <li><strong>Stripe Checkout</strong> – Subscription purchases</li>
+                <li><strong>Stripe Billing Portal</strong> – User-managed billing</li>
+            </ul>
+    
+            <h3>Analytics</h3>
+            <ul>
+                <li><strong>SQLite</strong> – Tracks session duration, distractions, productivity blocks</li>
+                <li><strong>React Dashboard</strong> – In-app visualization (no 3rd-party tracking)</li>
+            </ul>
+    
+            <h3>Build & Deployment</h3>
+            <ul>
+                <li><strong>GitHub Actions</strong> – CI/CD for building macOS & Windows binaries</li>
+                <li><strong>Tauri Updater</strong> – Auto-updates via GitHub Releases</li>
+                <li><strong>Code Signing</strong> – Apple Developer ID, optional Windows EV Cert</li>
+            </ul>
+    
+            <h3>Outcome</h3>
+            <p>
+                Anchor demonstrates how privacy-first apps can deliver real-time behavioral insight without compromising user data. Its offline-first architecture, advanced native integrations, and clean UI make it ideal for individual users, educators, and focus-driven professionals.
+            </p>
+    
+            <!-- <img src="../images/anchor-screenshot.jpg" alt="Anchor Screenshot"> -->
+            <!-- <p><a href="https://github.com/your-repo/anchor">View Project Repository</a></p> -->
+        </div>
+    </div>
+    </section>
+  </main>
+
+  <!-- Enhanced footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Vedant Sinha. Crafted with passion and precision.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Loading screen
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('loading').style.display = 'none';
+        }, 500);
+      }, 1000);
+    });
+  </script>
+</body>
+</html> 
